@@ -3,6 +3,7 @@ const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
 const takePhotoButton = document.querySelector('#startbutton');
 const switchCameraButton = document.querySelector('#switchbutton');
+const cameraInfoDiv = document.querySelector('#camera_information');
 
 // Get the available cameras
 async function getCameras() {
@@ -37,6 +38,7 @@ async function switchCamera() {
   const currentCameraId = video.srcObject.getVideoTracks()[0].getSettings().deviceId;
   const currentCameraIndex = cameras.findIndex(camera => camera.deviceId === currentCameraId);
   const nextCameraIndex = (currentCameraIndex + 1) % cameras.length;
+  cameraInfoDiv.innerHTML = `Current camera device ID: ${cameras[nextCameraIndex].deviceId} of ${cameras.length} <br> previous Camera ID: ${currentCameraId}`;
   await startCamera(cameras[nextCameraIndex].deviceId);
 }
 

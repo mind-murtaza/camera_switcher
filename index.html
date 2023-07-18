@@ -9,9 +9,13 @@
 </head>
 <body>
     <button id="startbutton">Take photo</button>
-    <button id="switchbutton" style="display: none;">Switch camera</button>
+    <button id="switchbutton" style="display: none; margin: 1em;">Switch camera</button>
     <div style="display: flex; justify-content: center; align-items: center;">
         <video id="video">Video stream not available.</video>
+    </div>
+    <div>
+        <p id="camera_information">  
+        </p>
     </div>
     <div style="display: flex; justify-content: center; align-items: center; margin-top: 5em; margin-bottom: 5em;">
         <canvas id="canvas"></canvas>
