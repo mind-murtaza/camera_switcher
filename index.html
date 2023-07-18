@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera Switch App</title>
+    <link rel="stylesheet" href="assets/css/index.css">
+    <script src="assets/js/index.js" defer></script>
+</head>
+<body>
+    <button id="startbutton">Take photo</button>
+    <button id="switchbutton" style="display: none;">Switch camera</button>
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <video id="video">Video stream not available.</video>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center; margin-top: 5em; margin-bottom: 5em;">
+        <canvas id="canvas"></canvas>
+    </div>
+</body>
+</html>
