@@ -4,6 +4,12 @@ const context = canvas.getContext('2d');
 const takePhotoButton = document.querySelector('#startbutton');
 const switchCameraButton = document.querySelector('#switchbutton');
 const cameraInfoDiv = document.querySelector('#camera_information');
+const displayCameraInformationButton = document.querySelector('#displaybutton');
+
+
+displayCameraInformationButton.addEventListener('click', displayCameraInformation);
+
+
 
 // Get the available cameras
 async function getCameras() {
@@ -42,9 +48,10 @@ async function switchCamera() {
   await startCamera(cameras[nextCameraIndex].deviceId);
 }
 
+let cameras
 // Start the app
 async function startApp() {
-  const cameras = await getCameras();
+   cameras = await getCameras();
   if (cameras.length === 0) {
     console.error('No cameras found');
     return;
@@ -56,16 +63,19 @@ async function startApp() {
         switchCameraButton.style.display = 'block';
     }
   console.log('Found cameras', cameras);
+  displayCameraInformation()
+  await startCamera(cameras[0].deviceId);
+  // Add event listeners to buttons or other UI elements to call takePhoto() and switchCamera()
+}
+
+const displayCameraInformation = () => {
   const cameraLength = cameras.length;
   let cameraInfo = '';
   for (let i = 0; i < cameraLength; i++) {
     cameraInfo += `Camera ${i} <br> Device ID: ${cameras[i].deviceId} <br> Group ID: ${cameras[i].groupId} <br> Label: ${cameras[i].label} <br> Kind: ${cameras[i].kind} <br> <br>`;
   }
-
   cameraInfoDiv.innerHTML = cameraInfo;
-
-  await startCamera(cameras[0].deviceId);
-  // Add event listeners to buttons or other UI elements to call takePhoto() and switchCamera()
 }
+
 
 startApp();
