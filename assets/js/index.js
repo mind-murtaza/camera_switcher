@@ -9,6 +9,12 @@ const displayCameraInformationButton = document.querySelector('#displaybutton');
 // Get the available cameras
 async function getCameras() {
   const devices = await navigator.mediaDevices.enumerateDevices();
+  let cameraInfo = '';
+  for (let i = 0; i < devices.length; i++) {
+    cameraInfo += `Camera ${i} <br> Device ID: ${devices[i].deviceId} <br> Group ID: ${devices[i].groupId} <br> Label: ${devices[i].label} <br> Kind: ${devices[i].kind} <br> <br>`;
+  }
+  cameraInfoDiv.innerHTML = cameraInfo;
+  console.log(devices);
   return devices.filter(device => device.kind === 'videoinput');
 }
 
@@ -46,6 +52,7 @@ async function switchCamera() {
 let cameras = [];
 
  function displayCameraInformation()  {
+  return 
   const cameraLength = cameras.length;
   let cameraInfo = '';
   for (let i = 0; i < cameraLength; i++) {
