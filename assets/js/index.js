@@ -6,11 +6,6 @@ const switchCameraButton = document.querySelector('#switchbutton');
 const cameraInfoDiv = document.querySelector('#camera_information');
 const displayCameraInformationButton = document.querySelector('#displaybutton');
 
-
-displayCameraInformationButton.addEventListener('click', displayCameraInformation);
-
-
-
 // Get the available cameras
 async function getCameras() {
   const devices = await navigator.mediaDevices.enumerateDevices();
@@ -48,7 +43,17 @@ async function switchCamera() {
   await startCamera(cameras[nextCameraIndex].deviceId);
 }
 
-let cameras
+let cameras = [];
+
+ function displayCameraInformation()  {
+  const cameraLength = cameras.length;
+  let cameraInfo = '';
+  for (let i = 0; i < cameraLength; i++) {
+    cameraInfo += `Camera ${i} <br> Device ID: ${cameras[i].deviceId} <br> Group ID: ${cameras[i].groupId} <br> Label: ${cameras[i].label} <br> Kind: ${cameras[i].kind} <br> <br>`;
+  }
+  cameraInfoDiv.innerHTML = cameraInfo;
+}
+
 // Start the app
 async function startApp() {
    cameras = await getCameras();
@@ -68,14 +73,7 @@ async function startApp() {
   // Add event listeners to buttons or other UI elements to call takePhoto() and switchCamera()
 }
 
-const displayCameraInformation = () => {
-  const cameraLength = cameras.length;
-  let cameraInfo = '';
-  for (let i = 0; i < cameraLength; i++) {
-    cameraInfo += `Camera ${i} <br> Device ID: ${cameras[i].deviceId} <br> Group ID: ${cameras[i].groupId} <br> Label: ${cameras[i].label} <br> Kind: ${cameras[i].kind} <br> <br>`;
-  }
-  cameraInfoDiv.innerHTML = cameraInfo;
-}
+displayCameraInformationButton.addEventListener('click', displayCameraInformation());
 
 
 startApp();
