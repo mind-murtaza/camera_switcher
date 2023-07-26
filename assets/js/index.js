@@ -56,6 +56,14 @@ async function startApp() {
         switchCameraButton.style.display = 'block';
     }
   console.log('Found cameras', cameras);
+  const cameraLength = cameras.length;
+  let cameraInfo = '';
+  for (let i = 0; i < cameraLength; i++) {
+    cameraInfo += `Camera ${i} <br> Device ID: ${cameras[i].deviceId} <br> Group ID: ${cameras[i].groupId} <br> Label: ${cameras[i].label} <br> Kind: ${cameras[i].kind} <br> <br>`;
+  }
+
+  cameraInfoDiv.innerHTML = cameraInfo;
+
   await startCamera(cameras[0].deviceId);
   // Add event listeners to buttons or other UI elements to call takePhoto() and switchCamera()
 }
